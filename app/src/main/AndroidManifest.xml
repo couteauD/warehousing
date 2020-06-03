@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StockingActivity"></activity>
-        <activity android:name=".OrderPickingActivity" />
-        <activity android:name=".InventoryQueryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".StockingActivity"
+            android:label="库存盘点"></activity>
+        <activity android:name=".OrderPickingActivity"
+            android:label="订单拣货"/>
+        <activity android:name=".InventoryQueryActivity"
+            android:label="库存查询"/>
+        <activity android:name=".MainActivity"
+            android:label="仓储管理">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
