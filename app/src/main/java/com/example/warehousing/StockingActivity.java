@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import org.litepal.tablemanager.Connector;
+
 public class StockingActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,8 @@ public class StockingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        
+
+        Connector.getDatabase();
     }
 
     @Override

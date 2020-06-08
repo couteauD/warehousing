@@ -3,19 +3,24 @@
     package="com.example.warehousing">
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StockingActivity"
-            android:label="库存盘点"></activity>
-        <activity android:name=".OrderPickingActivity"
-            android:label="订单拣货"/>
-        <activity android:name=".InventoryQueryActivity"
-            android:label="库存查询"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".StockingActivity"
+            android:label="库存盘点" />
+        <activity
+            android:name=".OrderPickingActivity"
+            android:label="订单拣货" />
+        <activity
+            android:name=".InventoryQueryActivity"
+            android:label="库存查询" />
+        <activity
+            android:name=".MainActivity"
             android:label="仓储管理">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
