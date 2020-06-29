@@ -26,9 +26,9 @@ public class OrderPickingActivity extends AppCompatActivity {
 
     private Context context;
     private Toolbar toolbar;
-    private LinearLayout linearLayoutSearch;
+    private LinearLayout linearLayoutCheck;
     private EditText editTextID;
-    private ImageButton imageButtonSearch;
+    private ImageButton imageButtonCheck;
     private SmartTable table;
     private TableData tableData;
     private List<Order> list = new ArrayList<>();
@@ -44,9 +44,9 @@ public class OrderPickingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        linearLayoutSearch = findViewById(R.id.linearLayout_search);
+        linearLayoutCheck = findViewById(R.id.linearLayout_check);
         editTextID = findViewById(R.id.editText_ID);
-        imageButtonSearch = findViewById(R.id.imageButton_search);
+        imageButtonCheck = findViewById(R.id.imageButton_check);
         table = findViewById(R.id.query_table);
 
         //表格列
