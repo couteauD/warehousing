@@ -52,6 +52,7 @@ public class InventoryQueryActivity extends AppCompatActivity {
         userInfo.location="A1";
         list.add(0,userInfo);
         table.setData(list);
+        table.getConfig().setShowXSequence(false);
     }
 
     @Override
