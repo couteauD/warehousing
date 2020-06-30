@@ -3,14 +3,16 @@ package com.example.warehousing;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private BaleHelper baleHelper;
     private Button button_inventory_query;
     private Button button_order_picking;
     private Button button_stocking;
@@ -29,7 +31,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_inventory_query.setOnClickListener(this);
         button_order_picking.setOnClickListener(this);
         button_stocking.setOnClickListener(this);
+
+        initDB();
     }
+
+    private void initDB() {
+        SQLiteDatabase db = SQLiteDB.getInstance(MainActivity.this).getDb();
+//        ContentValues values = new ContentValues();
+//        values.put("number","001");
+//        values.put("id","4a507db7-7c52-2c22-d6a6-77ade48625bd");
+//        values.put("rack","A");
+//        values.put("location","1");
+//        values.put("count","8");
+//        db.insert("Bale",null,values);
+//        values.clear();
+    }
+
 
     @Override
     public void onClick(View v) {

@@ -19,12 +19,9 @@ import android.widget.LinearLayout;
 import com.bin.david.form.annotation.SmartColumn;
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.column.Column;
-import com.bin.david.form.data.format.draw.ImageResDrawFormat;
 import com.bin.david.form.data.table.TableData;
 import com.bin.david.form.listener.OnColumnItemClickListener;
-import com.bin.david.form.utils.DensityUtils;
 
-import org.litepal.tablemanager.Connector;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -53,8 +50,6 @@ public class StockingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        Connector.getDatabase();
 
         linearLayoutSearch = findViewById(R.id.linearLayout_search);
         editTextID = findViewById(R.id.editText_ID);

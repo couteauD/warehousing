@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -25,6 +28,7 @@ public class InventoryQueryActivity extends AppCompatActivity {
     private ImageButton imageButtonSearch;
     private SmartTable table;
     private List<UserInfo> list = new ArrayList<>();
+    private BaleHelper baleHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +45,28 @@ public class InventoryQueryActivity extends AppCompatActivity {
         imageButtonSearch = findViewById(R.id.imageButton_search);
         table = findViewById(R.id.query_table);
 
-        initTable();
-
+        imageButtonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String clothingID = editTextID.getText().toString();
+                initTable(clothingID);
+            }
+        });
     }
 
-    private void initTable() {
+    private void initTable(String clothingID) {
+        SQLiteDatabase db = SQLiteDB.getInstance(InventoryQueryActivity.this).getDb();
+        Cursor cursor = db.rawQuery("select * from Bale where ID ="+"'"+clothingID+"'",null);
         UserInfo userInfo = new UserInfo();
-        userInfo.ID="4a507db7-7c52-2c22-d6a6-77ade48625bd";
-        userInfo.count=1;
-        userInfo.location="A1";
-        list.add(0,userInfo);
+        list.clear();
+        if (cursor.moveToFirst()){
+            do{
+                userInfo.ID= clothingID ;
+                userInfo.count = cursor.getInt(cursor.getColumnIndex("count"));
+                userInfo.location = cursor.getString(cursor.getColumnIndex("rack")) + cursor.getInt(cursor.getColumnIndex("location"));
+                list.add(userInfo);
+            }while (cursor.moveToNext());
+        }
         table.setData(list);
         table.getConfig().setShowXSequence(false);
     }
