@@ -27,8 +27,10 @@ import com.bin.david.form.listener.OnColumnItemClickListener;
 
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class StockingActivity extends AppCompatActivity {
@@ -42,7 +44,8 @@ public class StockingActivity extends AppCompatActivity {
     private TableData tableData;
     private List<Order> list = new ArrayList<>();
 
-    private Order[] order = new Order[12];
+    private List<Order> order = new ArrayList<>();
+    private ArrayList<String> record = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class StockingActivity extends AppCompatActivity {
         realColumn.setOnColumnItemClickListener(new OnColumnItemClickListener<Integer>() {
             @Override
             public void onClick(Column<Integer> column, String value, Integer integer, final int position) {
-                order[position] = list.get(position);
+                order.add(position,list.get(position));
                 final EditText real_editText = new EditText(StockingActivity.this);
                 real_editText.setFocusable(true);
                 real_editText.setHint("输入实际数量（件）");
@@ -79,7 +82,7 @@ public class StockingActivity extends AppCompatActivity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //修改表格数量
-                                order[position].real = Integer.parseInt(real_editText.getText().toString());
+                                order.get(position).real= Integer.parseInt(real_editText.getText().toString());
                                 table.notifyDataChanged();
                             }
                         }).show();
@@ -103,29 +106,38 @@ public class StockingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SQLiteDatabase db = SQLiteDB.getInstance(StockingActivity.this).getDb();
                 ContentValues values = new ContentValues();
-                for(int i=0;i<order.length;i++){
-                    if (order[i].real !=0){
-                        values.put("count",order[i].real);
+                for(int i=0;i<order.size();i++){
+                        values.put("count",order.get(i).real);
+                        writeRecord(list.get(i).ID,list.get(i).count,order.get(i).real);
+                        order.get(i).count = order.get(i).real;
+                        table.notifyDataChanged();
+
                         db.update("Bale",values,"id= ? ",new String[]{list.get(i).ID});
                         values.clear();
-                    }
                 }
-                finish();
             }
         });
 
         buttonRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RecordFragment recordFragment = new RecordFragment();
+                RecordFragment recordFragment = RecordFragment.newInstance(record);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 recordFragment.show(fragmentTransaction,"record");
-
             }
         });
 
     }
+
+    private void writeRecord(String id,int source,int target) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        Date curDate =  new Date(System.currentTimeMillis());
+        String time = formatter.format(curDate);
+        record.add(time+" "+id+" source:"+source+" target:"+target);
+    }
+
     private void init(String rack) {
         SQLiteDatabase db = SQLiteDB.getInstance(StockingActivity.this).getDb();
         Cursor cursor = db.rawQuery("select * from Bale where rack ="+"'"+rack+"'",null);
