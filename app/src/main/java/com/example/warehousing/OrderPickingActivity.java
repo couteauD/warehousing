@@ -1,12 +1,18 @@
 package com.example.warehousing;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,6 +38,9 @@ public class OrderPickingActivity extends AppCompatActivity {
     private SmartTable table;
     private TableData tableData;
     private List<Order> list = new ArrayList<>();
+
+    private int count;
+    private String clothingID,location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +77,64 @@ public class OrderPickingActivity extends AppCompatActivity {
             }
         });
         init();
-        tableData = new TableData<Order>("订单",list, IDColumn,countColumn,stateColumn);
+        tableData = new TableData<Order>("订单0001",list, IDColumn,countColumn,stateColumn);
         table.setTableData(tableData);
         table.getConfig().setShowXSequence(false);
+
+
+        imageButtonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clothingID = editTextID.getText().toString();
+                query(clothingID);
+                new AlertDialog.Builder(OrderPickingActivity.this).setTitle("产品位置")
+                        .setMessage("服装ID："+clothingID+"\n"+"库存数量(件): "+count+"\n"+"库存位置："+location)
+                        .setNegativeButton("取消",null)
+                        .setPositiveButton("确定",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                    for(int i=0;i<list.size();i++){
+                                        if(list.get(i).ID.equals(clothingID)){
+                                            list.get(i).state = true;
+                                            break;
+                                        }
+                                    }
+                                    table.notifyDataChanged();
+                            }
+                        }).show();
+            }
+        });
+    }
+
+    private void query(String clothingID) {
+        SQLiteDatabase db = SQLiteDB.getInstance(OrderPickingActivity.this).getDb();
+        Cursor cursor = db.rawQuery("select * from Bale where ID ="+"'"+clothingID+"'",null);
+        if (cursor.moveToFirst()){
+            do{
+                count = cursor.getInt(cursor.getColumnIndex("count"));
+                location = cursor.getString(cursor.getColumnIndex("rack")) + cursor.getInt(cursor.getColumnIndex("location"));
+            }while (cursor.moveToNext());
+        }
+
     }
 
     private void init() {
-        Order order = new Order();
-        order.ID = "4a507db7-7c52-2c22-d6a6-77ade48625bd";
-        order.count = 3;
-        order.state = true;
-        list.add(order);
+        Order order1 = new Order();
+        order1.ID = "0df1a700-2904-9b2d-a888-3535958ff3b3";
+        order1.count = 1;
+        order1.state = false;
+        list.add(order1);
+
+        Order order2 = new Order();
+        order2.ID = "fc25a168-bb33-f997-6572-8655f829361c";
+        order2.count = 1;
+        order2.state = false;
+        list.add(order2);
+
+        Order order3 = new Order();
+        order3.ID = "3020117f-7d45-32d5-1260-25433e829d49";
+        order3.count = 1;
+        order3.state = false;
+        list.add(order3);
     }
 
     @Override
