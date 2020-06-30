@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText_location"
+            android:id="@+id/editText_rack"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:hint="请输入库存位置" />

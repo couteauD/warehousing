@@ -57,10 +57,10 @@ public class InventoryQueryActivity extends AppCompatActivity {
     private void initTable(String clothingID) {
         SQLiteDatabase db = SQLiteDB.getInstance(InventoryQueryActivity.this).getDb();
         Cursor cursor = db.rawQuery("select * from Bale where ID ="+"'"+clothingID+"'",null);
-        UserInfo userInfo = new UserInfo();
         list.clear();
         if (cursor.moveToFirst()){
             do{
+                UserInfo userInfo = new UserInfo();
                 userInfo.ID= clothingID ;
                 userInfo.count = cursor.getInt(cursor.getColumnIndex("count"));
                 userInfo.location = cursor.getString(cursor.getColumnIndex("rack")) + cursor.getInt(cursor.getColumnIndex("location"));
