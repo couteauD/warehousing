@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InventoryQueryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_margin="30dp">
+
+        <Button
+            android:id="@+id/button_excel"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shape"
+            android:text="EXCEL订单文件导入"
+            android:textColor="#ffffff"/>
+
+        <Button
+            android:id="@+id/button_xml"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/button_shape"
+            android:text="XML订单文件导入"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+    <com.bin.david.form.core.SmartTable
+        android:id="@+id/table_order"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearLayout_import"
+        android:layout_margin="10dp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

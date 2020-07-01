@@ -61,4 +61,16 @@
         android:textColor="#ffffff"
         />
 
+    <Button
+        android:id="@+id/button_orderImport"
+        android:layout_width="209dp"
+        android:layout_height="50dp"
+        android:text="订单导入"
+        android:layout_below="@+id/button_enter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/button_shape"
+        android:textColor="#ffffff"
+        />
+
 </RelativeLayout>
