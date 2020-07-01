@@ -40,7 +40,6 @@ class importCSV {
                 while (matcher.find()){
                     String find = matcher.group().replace(",","");
                     lines[i] = find.trim();
-                    Log.e(TAG,"find="+find+",i="+i+",lines="+lines[i]);
                     i++;
                 }
                 ModuleOrder order = new ModuleOrder(lines[0],lines[1],lines[2]);
