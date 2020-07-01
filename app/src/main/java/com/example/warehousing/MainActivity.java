@@ -12,7 +12,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private BaleHelper baleHelper;
     private Button button_inventory_query;
     private Button button_order_picking;
     private Button button_stocking;

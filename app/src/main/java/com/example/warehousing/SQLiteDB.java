@@ -26,6 +26,4 @@ class SQLiteDB {
         }
         return sqLiteDB;
     }
-
-
 }

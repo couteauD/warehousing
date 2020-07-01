@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,11 +62,24 @@ public class OrderImportActivity extends AppCompatActivity {
 
     private void initTable(List<ModuleOrder> Orderlist) {
         List<UserInfo> Userlist = new ArrayList<>();
+        SQLiteDatabase db = SQLiteDB.getInstance(OrderImportActivity.this).getDb();
+        ContentValues values = new ContentValues();
         for(int i=0;i<Orderlist.size();i++){
+            String orderID = Orderlist.get(i).getOrderID();
+            String clothingID = Orderlist.get(i).getClothingID();
+            int count =  Orderlist.get(i).getCount();
+
+            values.put("number",i);
+            values.put("orderID",orderID);
+            values.put("clothingID",clothingID);
+            values.put("count",count);
+            db.insert("newOrder",null,values);
+            values.clear();
+
             UserInfo userInfo = new UserInfo();
-            userInfo.orderID = Orderlist.get(i).getOrderID();
-            userInfo.clothingID = Orderlist.get(i).getClothingID();
-            userInfo.count = Orderlist.get(i).getCount();
+            userInfo.orderID = orderID;
+            userInfo.clothingID = clothingID;
+            userInfo.count = count;
             Userlist.add(userInfo);
         }
         tableOrder.setData(Userlist);

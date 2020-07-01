@@ -16,6 +16,13 @@ public class BaleHelper extends SQLiteOpenHelper {
             +"location integer, "
             +"count interger)";
 
+    public static final String CREATE_ORDER ="create table newOrder ("
+            +"number integer PRIMARY KEY AUTOINCREMENT, "
+            +"orderID String, "
+            +"clothingID String, "
+            +"count interger)";
+
+
     private Context mContext;
     public BaleHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -24,7 +31,9 @@ public class BaleHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_BALE);
+
+        db.execSQL(CREATE_BALE);
+        db.execSQL(CREATE_ORDER);
     }
 
     @Override
