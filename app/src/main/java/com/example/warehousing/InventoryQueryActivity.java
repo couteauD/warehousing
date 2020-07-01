@@ -28,7 +28,6 @@ public class InventoryQueryActivity extends AppCompatActivity {
     private ImageButton imageButtonSearch;
     private SmartTable table;
     private List<UserInfo> list = new ArrayList<>();
-    private BaleHelper baleHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
