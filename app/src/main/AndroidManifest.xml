@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderImportActivity"
-            android:label="订单录入"/>
+        <activity android:name=".RetrunActivity"
+            android:label="退货处理"/>
+        <activity
+            android:name=".OrderImportActivity"
+            android:label="订单录入" />
         <activity
             android:name=".EnterActivity"
             android:label="商品入库" />

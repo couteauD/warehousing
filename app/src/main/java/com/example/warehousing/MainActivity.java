@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button button_stocking;
     private Button button_enter;
     private Button button_order_import;
+    private Button button_return;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button_stocking = findViewById(R.id.button_stocking);
         button_enter = findViewById(R.id.button_enter);
         button_order_import = findViewById(R.id.button_orderImport);
+        button_return = findViewById(R.id.button_return);
 
         button_inventory_query.setOnClickListener(this);
         button_order_picking.setOnClickListener(this);
         button_stocking.setOnClickListener(this);
         button_enter.setOnClickListener(this);
         button_order_import.setOnClickListener(this);
+        button_return.setOnClickListener(this);
 
-        initDB();
-    }
-
-    private void initDB() {
-        SQLiteDatabase db = SQLiteDB.getInstance(MainActivity.this).getDb();
-//        ContentValues values = new ContentValues();
-//        values.put("number","001");
-//        values.put("id","4a507db7-7c52-2c22-d6a6-77ade48625bd");
-//        values.put("rack","A");
-//        values.put("location","1");
-//        values.put("count","8");
-//        db.insert("Bale",null,values);
-//        values.clear();
     }
 
 
@@ -75,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.button_orderImport:
                 intent = new Intent(MainActivity.this,OrderImportActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button_return:
+                intent = new Intent(MainActivity.this,RetrunActivity.class);
                 startActivity(intent);
                 break;
         }
