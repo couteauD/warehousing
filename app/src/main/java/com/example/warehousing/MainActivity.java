@@ -9,15 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
 
-    private Button button_inventory_query;
-    private Button button_order_picking;
-    private Button button_stocking;
-    private Button button_enter;
-    private Button button_order_import;
-    private Button button_return;
+    private EditText editTextJobNumber,editTextPassword;
+    private Button buttonLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,52 +23,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        button_inventory_query = findViewById(R.id.button_inventory_query);
-        button_order_picking = findViewById(R.id.button_order_picking);
-        button_stocking = findViewById(R.id.button_stocking);
-        button_enter = findViewById(R.id.button_enter);
-        button_order_import = findViewById(R.id.button_orderImport);
-        button_return = findViewById(R.id.button_return);
+        editTextJobNumber = findViewById(R.id.editText_jobNumber);
+        editTextPassword = findViewById(R.id.editText_password);
+        buttonLogin = findViewById(R.id.button_login);
 
-        button_inventory_query.setOnClickListener(this);
-        button_order_picking.setOnClickListener(this);
-        button_stocking.setOnClickListener(this);
-        button_enter.setOnClickListener(this);
-        button_order_import.setOnClickListener(this);
-        button_return.setOnClickListener(this);
-
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                if(editTextJobNumber.getText().toString().equals("0001")){
+                    intent = new Intent(MainActivity.this, ManagerActivity.class);
+                }else{
+                    intent = new Intent(MainActivity.this, workerActivity.class);
+                }
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
-            case R.id.button_inventory_query:
-                intent = new Intent(MainActivity.this, InventoryQueryActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_order_picking:
-                intent = new Intent(MainActivity.this, OrderPickingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_stocking:
-                intent = new Intent(MainActivity.this, StockingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_enter:
-                intent = new Intent(MainActivity.this, EnterActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_orderImport:
-                intent = new Intent(MainActivity.this,OrderImportActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.button_return:
-                intent = new Intent(MainActivity.this,RetrunActivity.class);
-                startActivity(intent);
-                break;
-        }
-
-    }
 }

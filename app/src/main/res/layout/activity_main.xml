@@ -14,74 +14,82 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
-        android:id="@+id/button_inventory_query"
-        android:layout_width="209dp"
-        android:layout_height="50dp"
-        android:text="库存查询"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
-        android:background="@drawable/button_shape"
-        android:textColor="#ffffff"
-        />
+    <LinearLayout
+        android:id="@+id/linearLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="70dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="请输入您的工号和密码"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="开启新的工作任务吧！"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_jobNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/linearLayout_title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工号："
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editText_jobNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:layout_below="@id/linearLayout_jobNumber">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码："
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button_order_picking"
+        android:id="@+id/button_login"
         android:layout_width="209dp"
         android:layout_height="50dp"
-        android:text="订单拣货"
-        android:layout_below="@+id/button_inventory_query"
+        android:layout_below="@id/linearLayout_password"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
         android:background="@drawable/button_shape"
-        android:textColor="#ffffff"
-        />
-
-    <Button
-    android:id="@+id/button_stocking"
-    android:layout_width="209dp"
-    android:layout_height="50dp"
-    android:text="库存盘点"
-    android:layout_below="@+id/button_order_picking"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="27dp"
-    android:background="@drawable/button_shape"
-    android:textColor="#ffffff"
-    />
-
-    <Button
-        android:id="@+id/button_enter"
-        android:layout_width="209dp"
-        android:layout_height="50dp"
-        android:text="商品入库"
-       android:layout_below="@+id/button_stocking"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/button_shape"
-        android:textColor="#ffffff"
-        />
-
-    <Button
-        android:id="@+id/button_orderImport"
-        android:layout_width="209dp"
-        android:layout_height="50dp"
-        android:text="订单导入"
-        android:layout_below="@+id/button_enter"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/button_shape"
-        android:textColor="#ffffff"
-        />
-
-    <Button
-        android:id="@+id/button_return"
-        android:layout_width="209dp"
-        android:layout_height="50dp"
-        android:text="退货处理"
-        android:layout_below="@+id/button_orderImport"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:background="@drawable/button_shape"
-        android:textColor="#ffffff"
-        />
+        android:text="登    录"
+        android:textSize="18sp"
+        android:textColor="#ffffff"/>
 </RelativeLayout>
