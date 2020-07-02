@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -35,12 +36,14 @@ public class OrderPickingActivity extends AppCompatActivity {
     private LinearLayout linearLayoutCheck;
     private EditText editTextID;
     private ImageButton imageButtonCheck;
+    private Button buttonFinish;
     private SmartTable table;
     private TableData tableData;
     private List<Order> list = new ArrayList<>();
 
     private int count;
-    private String clothingID,location;
+    private String ID,location;
+    private int index=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,12 @@ public class OrderPickingActivity extends AppCompatActivity {
         linearLayoutCheck = findViewById(R.id.linearLayout_check);
         editTextID = findViewById(R.id.editText_ID);
         imageButtonCheck = findViewById(R.id.imageButton_check);
+        buttonFinish = findViewById(R.id.button_finish);
         table = findViewById(R.id.query_table);
 
         //表格列
-        final Column<String> IDColumn = new Column<>("订购产品", "ID");
+        final Column<String> orderIDColumn = new Column<>("订单ID","orderID");
+        final Column<String> clothingIDColumn = new Column<>("产品ID", "clothingID");
         final Column<Integer> countColumn = new Column<>("数量", "count");
         int size = DensityUtils.dp2px(context,15); //指定图标大小
         final Column<Boolean> stateColumn = new Column<>("状态", "state", new ImageResDrawFormat<Boolean>(size,size) {
@@ -77,7 +82,7 @@ public class OrderPickingActivity extends AppCompatActivity {
             }
         });
         init();
-        tableData = new TableData<Order>("订单0001",list, IDColumn,countColumn,stateColumn);
+        tableData = new TableData<Order>("拣货任务",list, orderIDColumn,clothingIDColumn,countColumn,stateColumn);
         table.setTableData(tableData);
         table.getConfig().setShowXSequence(false);
 
@@ -85,15 +90,15 @@ public class OrderPickingActivity extends AppCompatActivity {
         imageButtonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clothingID = editTextID.getText().toString();
-                query(clothingID);
+                ID = editTextID.getText().toString();
+                query(ID);
                 new AlertDialog.Builder(OrderPickingActivity.this).setTitle("产品位置")
-                        .setMessage("服装ID："+clothingID+"\n"+"库存数量(件): "+count+"\n"+"库存位置："+location)
+                        .setMessage("服装ID："+ID+"\n"+"库存数量(件): "+count+"\n"+"库存位置："+location)
                         .setNegativeButton("取消",null)
                         .setPositiveButton("确定",new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                     for(int i=0;i<list.size();i++){
-                                        if(list.get(i).ID.equals(clothingID)){
+                                        if(list.get(i).clothingID.equals(ID)){
                                             list.get(i).state = true;
                                             break;
                                         }
@@ -101,6 +106,16 @@ public class OrderPickingActivity extends AppCompatActivity {
                                     table.notifyDataChanged();
                             }
                         }).show();
+            }
+        });
+
+        buttonFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.clear();
+                index++;
+                init();
+                table.notifyDataChanged();
             }
         });
     }
@@ -118,23 +133,25 @@ public class OrderPickingActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Order order1 = new Order();
-        order1.ID = "0df1a700-2904-9b2d-a888-3535958ff3b3";
-        order1.count = 1;
-        order1.state = false;
-        list.add(order1);
-
-        Order order2 = new Order();
-        order2.ID = "fc25a168-bb33-f997-6572-8655f829361c";
-        order2.count = 1;
-        order2.state = false;
-        list.add(order2);
-
-        Order order3 = new Order();
-        order3.ID = "3020117f-7d45-32d5-1260-25433e829d49";
-        order3.count = 1;
-        order3.state = false;
-        list.add(order3);
+        SQLiteDatabase db = SQLiteDB.getInstance(OrderPickingActivity.this).getDb();
+        Cursor cursor = db.rawQuery("select * from newOrder where number >="+index,null);
+        int sum = 0;
+        if (cursor.moveToFirst()){
+            do{
+                Order order = new Order();
+                order.orderID = cursor.getString(cursor.getColumnIndex("orderID"));
+                order.clothingID = cursor.getString(cursor.getColumnIndex("clothingID"));
+                order.count = cursor.getInt(cursor.getColumnIndex("count"));
+                sum+=order.count;
+                order.state = false;
+                if(sum <= 5){
+                    index++;
+                    list.add(order);
+                }else{
+                    break;
+                }
+            }while (cursor.moveToNext());
+        }
     }
 
     @Override
@@ -147,7 +164,8 @@ public class OrderPickingActivity extends AppCompatActivity {
     }
 
     private class Order{
-        private String ID;
+        private String orderID;
+        private String clothingID;
         private int count;
         private Boolean state;
     }
