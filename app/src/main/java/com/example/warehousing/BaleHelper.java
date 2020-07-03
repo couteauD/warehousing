@@ -22,6 +22,11 @@ public class BaleHelper extends SQLiteOpenHelper {
             +"clothingID String, "
             +"count interger)";
 
+    public static final String CREATE_USER = "create table User ("
+            +"number integer PRIMARY KEY AUTOINCREMENT, "
+            +"jobNumber String, "
+            +"password String, "
+            +"identity String)";
 
     private Context mContext;
     public BaleHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -34,6 +39,7 @@ public class BaleHelper extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_BALE);
         db.execSQL(CREATE_ORDER);
+        db.execSQL(CREATE_USER);
     }
 
     @Override

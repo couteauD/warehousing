@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -31,12 +32,23 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent;
-                if(editTextJobNumber.getText().toString().equals("0001")){
-                    intent = new Intent(MainActivity.this, ManagerActivity.class);
-                }else{
-                    intent = new Intent(MainActivity.this, workerActivity.class);
+                String number = editTextJobNumber.getText().toString();
+
+                SQLiteDatabase db = SQLiteDB.getInstance(MainActivity.this).getDb();
+                Cursor cursor = db.rawQuery("select identity from User where jobNumber="+number ,null);
+                if(cursor.moveToFirst()){
+                    if(cursor.getString(cursor.getColumnIndex("identity")).equals("manager")){
+                        intent = new Intent(MainActivity.this, ManagerActivity.class);
+                    }else{
+                        intent = new Intent(MainActivity.this, workerActivity.class);
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
+                if(number.equals("0001")){
+                    intent = new Intent(MainActivity.this, ManagerActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
         });
