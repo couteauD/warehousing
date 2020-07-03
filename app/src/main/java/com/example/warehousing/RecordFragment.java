@@ -29,10 +29,6 @@ public class RecordFragment extends DialogFragment {
 
     private ListView listViewRecord;
 
-    public RecordFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -40,7 +36,6 @@ public class RecordFragment extends DialogFragment {
      * @param param1 Parameter 1.
      * @return A new instance of fragment RecordFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static RecordFragment newInstance(ArrayList<String> param1) {
         RecordFragment fragment = new RecordFragment();
         Bundle args = new Bundle();

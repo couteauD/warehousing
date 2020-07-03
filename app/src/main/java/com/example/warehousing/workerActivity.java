@@ -17,6 +17,8 @@ public class workerActivity extends AppCompatActivity implements View.OnClickLis
     private Button buttonInventoryQuery,buttonStocking,buttonOrderPicking,buttonEnter,
                     buttonOrderImport,buttonReturn,buttonLogout;
 
+    private String jobNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,8 @@ public class workerActivity extends AppCompatActivity implements View.OnClickLis
         buttonOrderImport.setOnClickListener(this);
         buttonReturn.setOnClickListener(this);
         buttonLogout.setOnClickListener(this);
+
+        jobNumber = getIntent().getStringExtra("jobNumber");
     }
 
     @Override
@@ -52,6 +56,7 @@ public class workerActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.button_stocking:
                 intent = new Intent(workerActivity.this,StockingActivity.class);
+                intent.putExtra("jobNumber",jobNumber);
                 startActivity(intent);
                 break;
             case R.id.button_orderPicking:

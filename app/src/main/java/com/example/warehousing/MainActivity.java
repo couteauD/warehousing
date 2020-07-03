@@ -35,17 +35,18 @@ public class MainActivity extends AppCompatActivity{
                 String number = editTextJobNumber.getText().toString();
 
                 SQLiteDatabase db = SQLiteDB.getInstance(MainActivity.this).getDb();
-                Cursor cursor = db.rawQuery("select identity from User where jobNumber="+number ,null);
-                if(cursor.moveToFirst()){
-                    if(cursor.getString(cursor.getColumnIndex("identity")).equals("manager")){
+                Cursor cursor = db.rawQuery("select identity from User where jobNumber=" + number, null);
+                if (cursor.moveToFirst()) {
+                    if (cursor.getString(cursor.getColumnIndex("identity")).equals("manager")) {
                         intent = new Intent(MainActivity.this, ManagerActivity.class);
-                    }else{
+                    } else {
                         intent = new Intent(MainActivity.this, workerActivity.class);
+                        intent.putExtra("jobNumber",number);
                     }
                     startActivity(intent);
                 }
 
-                if(number.equals("0001")){
+                if (number.equals("0001")) {
                     intent = new Intent(MainActivity.this, ManagerActivity.class);
                     startActivity(intent);
                 }
@@ -53,6 +54,5 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
-
 
 }

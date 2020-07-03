@@ -47,6 +47,8 @@ public class StockingActivity extends AppCompatActivity {
     private List<Order> order = new ArrayList<>();
     private ArrayList<String> record = new ArrayList<>();
 
+    private String jobNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +96,14 @@ public class StockingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rack = editTextRack.getText().toString();
-                init(rack);
+                jobNumber = getIntent().getStringExtra("jobNumber");
+                if(jobNumber != null){
+                    AbstractPermission abstractPermission = PremissonFactory.getPremission(StockingActivity.this,jobNumber,rack);
+                    list = abstractPermission.check(StockingActivity.this,jobNumber,rack);
+                }
+                else{
+                    init(rack);
+                }
                 tableData = new TableData<Order>("库存详情",list, IDColumn,countColumn,realColumn);
                 table.setTableData(tableData);
                 table.getConfig().setShowXSequence(false);
@@ -163,10 +172,10 @@ public class StockingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class Order{
-        private String ID;
-        private int count;
-        private int real;
+    static class Order{
+        String ID;
+        int count;
+        int real;
     }
 
 }
