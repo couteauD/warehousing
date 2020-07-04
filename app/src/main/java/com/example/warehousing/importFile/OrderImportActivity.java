@@ -1,4 +1,4 @@
-package com.example.warehousing;
+package com.example.warehousing.importFile;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,31 +9,25 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.bin.david.form.annotation.SmartColumn;
 import com.bin.david.form.core.SmartTable;
+import com.example.warehousing.ModuleOrder;
+import com.example.warehousing.R;
+import com.example.warehousing.SQLiteDB;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;

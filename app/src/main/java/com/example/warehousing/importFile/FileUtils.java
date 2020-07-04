@@ -1,4 +1,4 @@
-package com.example.warehousing;
+package com.example.warehousing.importFile;
 
 import android.content.Context;
 import android.database.Cursor;

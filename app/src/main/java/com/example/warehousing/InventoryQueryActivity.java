@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 
 import com.bin.david.form.annotation.SmartColumn;
 import com.bin.david.form.core.SmartTable;
+import com.example.warehousing.init.Bale;
+import com.example.warehousing.init.importBale;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,8 @@ public class InventoryQueryActivity extends AppCompatActivity {
             }
         });
 
+        importBale importBale = new importBale();
+        initTable(importBale.importFile(InventoryQueryActivity.this));
         init();
     }
 
@@ -120,6 +124,43 @@ public class InventoryQueryActivity extends AppCompatActivity {
         private int count;
         @SmartColumn(id=3,name="库存位置")
         private String location;
+    }
+
+    private void initTable(List<Bale> Balelist) {
+        List<UserInfo> Userlist = new ArrayList<>();
+        SQLiteDatabase db = SQLiteDB.getInstance(InventoryQueryActivity.this).getDb();
+        ContentValues values = new ContentValues();
+        for(int i=0;i<Balelist.size();i++){
+            String ID = Balelist.get(i).getID();
+            int count = Balelist.get(i).getCount();
+            String rack = Balelist.get(i).getRack() ;
+            int location = Balelist.get(i).getLocation();
+
+            if(rack.equals("A")){
+                values.put("number",i);
+            }else if(rack.equals("B")){
+                values.put("number",i+12);
+            }else if(rack.equals("C")){
+                values.put("number",i+24);
+            }else if(rack.equals("D")){
+                values.put("number",i+36);
+            }
+
+            values.put("id",ID);
+            values.put("rack",rack);
+            values.put("location",location);
+            values.put("count",count);
+            db.insert("Bale",null,values);
+            values.clear();
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.ID = ID;
+            userInfo.location= rack+location;
+            userInfo.count = count;
+            Userlist.add(userInfo);
+        }
+        table.setData(Userlist);
+        table.getConfig().setShowXSequence(false);
     }
 
 }

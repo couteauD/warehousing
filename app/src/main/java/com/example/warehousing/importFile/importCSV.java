@@ -1,19 +1,12 @@
-package com.example.warehousing;
+package com.example.warehousing.importFile;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.util.Log;
-import android.view.View;
 
-import androidx.core.app.ActivityCompat;
+import com.example.warehousing.ModuleOrder;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +14,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static android.content.ContentValues.TAG;
-
 class importCSV implements importFile{
 
-    public List<ModuleOrder> importFile(Context context,String path){
+    public List<ModuleOrder> importFile(Context context, String path){
         List<ModuleOrder> list = new ArrayList<>();
         InputStream inputStream;
         Scanner scanner;

@@ -25,7 +25,7 @@
             android:name=".RetrunActivity"
             android:label="退货处理" />
         <activity
-            android:name=".OrderImportActivity"
+            android:name=".importFile.OrderImportActivity"
             android:label="订单录入" />
         <activity
             android:name=".EnterActivity"

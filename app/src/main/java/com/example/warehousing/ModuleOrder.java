@@ -1,6 +1,6 @@
 package com.example.warehousing;
 
-class ModuleOrder {
+public class ModuleOrder {
 
     private String orderID;
     private String clothingID;
