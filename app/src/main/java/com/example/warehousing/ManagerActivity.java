@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.warehousing.stocking.StockingActivity;
+
 public class ManagerActivity extends AppCompatActivity implements View.OnClickListener{
 
 
@@ -48,7 +50,7 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.button_stocking:
-                intent = new Intent(ManagerActivity.this,StockingActivity.class);
+                intent = new Intent(ManagerActivity.this, StockingActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button_orderQuery:

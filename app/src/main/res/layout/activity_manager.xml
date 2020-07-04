@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/button_inventoryQuery"
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:layout_height="170dp"
             android:background="#DDFF7373"
             android:text="库存查询"
@@ -52,7 +52,7 @@
 
         <Button
             android:id="@+id/button_stocking"
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:layout_height="170dp"
             android:layout_alignParentRight="true"
             android:background="#DDFFDC73"
@@ -61,7 +61,7 @@
 
         <Button
             android:id="@+id/button_orderQuery"
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:layout_height="170dp"
             android:layout_below="@id/button_inventoryQuery"
             android:layout_marginTop="20dp"
@@ -71,7 +71,7 @@
 
         <Button
             android:id="@+id/button_users"
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:layout_height="170dp"
             android:layout_below="@id/button_stocking"
             android:layout_alignParentRight="true"

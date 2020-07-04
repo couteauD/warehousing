@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.warehousing.stocking.StockingActivity;
+
 public class workerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar toolbar;
@@ -55,7 +57,7 @@ public class workerActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.button_stocking:
-                intent = new Intent(workerActivity.this,StockingActivity.class);
+                intent = new Intent(workerActivity.this, StockingActivity.class);
                 intent.putExtra("jobNumber",jobNumber);
                 startActivity(intent);
                 break;

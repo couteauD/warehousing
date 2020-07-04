@@ -2,15 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.warehousing">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".UsersActivity"
-            android:label="用户管理"/>
+        android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/providers_path" />
+
+        <activity
+            android:name=".UsersActivity"
+            android:label="用户管理" />
         <activity android:name=".workerActivity" />
         <activity android:name=".ManagerActivity" />
         <activity
@@ -23,7 +31,7 @@
             android:name=".EnterActivity"
             android:label="商品入库" />
         <activity
-            android:name=".StockingActivity"
+            android:name=".stocking.StockingActivity"
             android:label="库存盘点" />
         <activity
             android:name=".OrderPickingActivity"
@@ -40,6 +48,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.warehousing.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/providers_path" />
+        </provider>
     </application>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

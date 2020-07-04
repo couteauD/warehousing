@@ -1,9 +1,11 @@
-package com.example.warehousing;
+package com.example.warehousing.stocking;
 
 import android.content.Context;
 import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
+
+import com.example.warehousing.stocking.AbstractPermission;
 
 import java.util.ArrayList;
 import java.util.List;

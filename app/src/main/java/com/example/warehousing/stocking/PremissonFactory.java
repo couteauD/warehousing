@@ -1,6 +1,9 @@
-package com.example.warehousing;
+package com.example.warehousing.stocking;
 
 import android.content.Context;
+
+
+import com.example.warehousing.stocking.AbstractPermission;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +18,7 @@ class PremissonFactory {
         premisson.put(4,"D");
     }
 
-    public static AbstractPermission getPremission(Context context,String jobNumber,String rack){
+    public static AbstractPermission getPremission(Context context, String jobNumber, String rack){
         AbstractPermission abstractPermission = null;
         int number = Integer.parseInt(jobNumber);
         System.out.println(number);

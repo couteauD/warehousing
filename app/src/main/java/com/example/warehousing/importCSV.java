@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,14 +23,15 @@ import java.util.regex.Pattern;
 
 import static android.content.ContentValues.TAG;
 
-class importCSV {
+class importCSV implements importFile{
 
-    public List<ModuleOrder> importCSV(Context context){
+    public List<ModuleOrder> importFile(Context context,String path){
         List<ModuleOrder> list = new ArrayList<>();
         InputStream inputStream;
         Scanner scanner;
         try{
-            inputStream = context.getResources().getAssets().open("orderForm.csv");
+            File file = new File(path);
+            inputStream = new FileInputStream(file);
             scanner = new Scanner(inputStream,"UTF-8");
             scanner.nextLine();
             while(scanner.hasNextLine()){
@@ -47,11 +49,7 @@ class importCSV {
                 list.add(order);
                 i=0;
             }
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (NumberFormatException | FileNotFoundException e) {
             e.printStackTrace();
         }
         return list;

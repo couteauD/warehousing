@@ -1,13 +1,17 @@
-package com.example.warehousing;
+package com.example.warehousing.stocking;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.warehousing.SQLiteDB;
+import com.example.warehousing.stocking.AbstractPermission;
+import com.example.warehousing.stocking.StockingActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class hasPremisson implements AbstractPermission{
+class hasPremisson implements AbstractPermission {
 
     private List list = new ArrayList();
     @Override

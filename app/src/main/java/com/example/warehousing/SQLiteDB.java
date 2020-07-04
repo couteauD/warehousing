@@ -3,7 +3,7 @@ package com.example.warehousing;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-class SQLiteDB {
+public class SQLiteDB {
 
     public static final String DB_NAME = "Bale_repertory.db";
     public static final int VERSION = 1;

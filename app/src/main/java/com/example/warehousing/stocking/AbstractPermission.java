@@ -1,4 +1,4 @@
-package com.example.warehousing;
+package com.example.warehousing.stocking;
 
 import android.content.Context;
 

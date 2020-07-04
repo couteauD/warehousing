@@ -24,7 +24,8 @@
 
         <EditText
             android:id="@+id/editText_rack"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:hint="请输入库存位置" />
 
@@ -60,18 +61,18 @@
 
         <Button
             android:id="@+id/button_update"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
+            android:layout_weight="1"
             android:background="@drawable/button_shape"
             android:text="确认更新"
             android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/button_record"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
             android:background="@drawable/button_shape"
             android:text="查看盘点记录"
             android:textColor="#ffffff" />
